@@ -3,7 +3,8 @@ Param
 (
     [string]$Product = 'AzADServicePrincipalInsights',
     [string]$ScriptPath = 'pwsh',
-    [string]$ProductVersion = 'v1_20250121_0',
+    [string]$ProductVersion = 'v1_20250430_0',
+    [string][ValidateSet('AzAPICall', 'AzAPICallBeta')]$AzAPICallModuleName = 'AzAPICall',
     [string]$azAPICallVersion = '1.2.5',
     [string]$GitHubRepository = 'aka.ms/AzADServicePrincipalInsights',
     [switch]$AzureDevOpsWikiAsCode, #deprecated - Based on environment variables the script will detect the code run platform
@@ -245,7 +246,7 @@ function verifyModules3rd {
 
 $modules = [System.Collections.ArrayList]@()
 $null = $modules.Add([PSCustomObject]@{
-        ModuleName = 'AzAPICall'
+        ModuleName = $AzAPICallModuleName
         ModuleVersion = $AzAPICallVersion
         ModuleProductName = 'AzAPICall'
         ModulePathPipeline = 'AzAPICallModule'
